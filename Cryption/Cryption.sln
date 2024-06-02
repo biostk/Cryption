@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.33801.447
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cryption", "Cryption.csproj", "{062A784F-54AF-4547-9102-558A45103956}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo", "..\Demo\Demo.csproj", "{000DAB87-8DD7-4504-BB33-ADACBD56869E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{062A784F-54AF-4547-9102-558A45103956}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{062A784F-54AF-4547-9102-558A45103956}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{062A784F-54AF-4547-9102-558A45103956}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{062A784F-54AF-4547-9102-558A45103956}.Release|Any CPU.Build.0 = Release|Any CPU
+		{000DAB87-8DD7-4504-BB33-ADACBD56869E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{000DAB87-8DD7-4504-BB33-ADACBD56869E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{000DAB87-8DD7-4504-BB33-ADACBD56869E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{000DAB87-8DD7-4504-BB33-ADACBD56869E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {279C22CD-C435-453D-AD6C-E94CB1125C30}
+	EndGlobalSection
+EndGlobal
