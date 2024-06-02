@@ -1,376 +1,228 @@
-# RSAEncryption 类说明
+# Cryption Namespace
 
-## 类概述
-`RSAEncryption`类封装了RSA加密的常用功能，包括生成密钥对、导出和导入公钥和私钥、数据加密和解密。此类还支持将密钥导出为PEM格式，并从PEM格式导入密钥。
+该命名空间包含用于 RSA 加密和解密的类，包括密钥对的生成、导出和导入。
 
-## 构造函数
+## RSAEncryption 类
 
-### RSAEncryption()
-初始化`RSAEncryption`类的新实例。
+`RSAEncryption` 类提供了 RSA 加密和解密功能，密钥对的生成、导出和导入。
+
+### 构造函数
+
+- `RSAEncryption()`
+  - 初始化 `RSACryptoServiceProvider` 实例。
+
+### 公共方法
+
+- `void GenerateKeys(int keySize)`
+  - 生成指定大小的 RSA 密钥对。
+  - 参数：
+    - `keySize`：密钥的大小，以位为单位。常见的密钥大小包括 1024、2048、4096 等。
+
+- `string ExportPublicKeyToPEM()`
+  - 导出公钥为 PEM 格式字符串。
+  - 返回值：
+    - `PEM 格式的公钥字符串。`
+
+- `string ExportPrivateKeyToPEM()`
+  - 导出私钥为 PEM 格式字符串。
+  - 返回值：
+    - `PEM 格式的私钥字符串。`
+
+- `void ImportPublicKeyFromPEM(string pem)`
+  - 从 PEM 格式字符串导入公钥。
+  - 参数：
+    - `pem`：PEM 格式的公钥字符串。
+
+- `void ImportPrivateKeyFromPEM(string pem)`
+  - 从 PEM 格式字符串导入私钥。
+  - 参数：
+    - `pem`：PEM 格式的私钥字符串。
+
+- `byte[] Encrypt(byte[] data)`
+  - 加密字节数组。
+  - 参数：
+    - `data`：待加密的字节数组。
+  - 返回值：
+    - `加密后的字节数组。`
+
+- `byte[] Decrypt(byte[] data)`
+  - 解密字节数组。
+  - 参数：
+    - `data`：待解密的字节数组。
+  - 返回值：
+    - `解密后的字节数组。`
+
+- `string Encrypt(string data)`
+  - 加密字符串。
+  - 参数：
+    - `data`：待加密的字符串。
+  - 返回值：
+    - `加密后的字符串，以 Base64 编码表示。`
+
+- `string Decrypt(string data)`
+  - 解密字符串。
+  - 参数：
+    - `data`：待解密的字符串，以 Base64 编码表示。
+  - 返回值：
+    - `解密后的字符串。`
+
+- `void SetPublicKeyFromModulusAndExponent(byte[] modulus, byte[] exponent)`
+  - 设置公钥的模数和指数。
+  - 参数：
+    - `modulus`：公钥的模数。
+    - `exponent`：公钥的指数。
+
+- `byte[] HexModulusToByteArray(string hexModulus)`
+  - 将十六进制表示的模数转换为字节数组。
+  - 参数：
+    - `hexModulus`：十六进制表示的模数字符串。
+  - 返回值：
+    - `模数的字节数组。`
+
+- `string HexModulusToString(byte[] modulus)`
+  - 将字节数组的模数转换为十六进制表示的字符串。
+  - 参数：
+    - `modulus`：模数的字节数组。
+  - 返回值：
+    - `十六进制表示的模数字符串。`
+
+- `string ExportPublicKeyModulusToHex()`
+  - 将公钥的模数导出为十六进制字符串。
+  - 返回值：
+    - `十六进制表示的公钥模数字符串。`
+
+### 私有方法
+
+- `string ExportParametersToPEM(RSAParameters parameters, bool includePrivateKey)`
+  - 将 RSA 参数导出为 PEM 格式字符串。
+  - 参数：
+    - `parameters`：要导出的 RSA 参数。
+    - `includePrivateKey`：是否包括私钥。如果为 `true`，则导出私钥；否则，仅导出公钥。
+  - 返回值：
+    - `PEM 格式的 RSA 参数字符串。`
+
+- `RSAParameters ImportParametersFromPEM(string pem, bool includePrivateKey = false)`
+  - 从 PEM 格式字符串导入 RSA 参数。
+  - 参数：
+    - `pem`：PEM 格式的 RSA 参数字符串。
+    - `includePrivateKey`（可选）：是否包括私钥。如果为 `true`，则导入私钥；否则，仅导入公钥。
+  - 返回值：
+    - `导入的 RSA 参数。`
+
+## PemWriter 类
+
+`PemWriter` 类用于将 RSA 参数写入 PEM 格式。
+
+### 构造函数
+
+- `PemWriter(System.IO.TextWriter writer)`
+  - 初始化文本写入器。
+  - 参数：
+    - `writer`：用于写入 PEM 格式的文本写入器。
+
+### 公共方法
+
+- `void WriteObject(RSAParameters parameters, bool includePrivateKey)`
+  - 将 RSA 参数写入 PEM 格式。
+  - 参数：
+    - `parameters`：要写入的 RSA 参数。
+    - `includePrivateKey`：是否包括私钥。如果为 `true`，则写入私钥；否则，仅写入公钥。
+
+### 私有方法
+
+- `byte[] ToAsn1PublicKey(RSAParameters parameters)`
+  - 将公钥参数转换为 ASN.1 格式字节数组。
+  - 参数：
+    - `parameters`：公钥的 RSA 参数。
+  - 返回值：
+    - `ASN.1 格式的公钥字节数组。`
+
+- `byte[] ToAsn1PrivateKey(RSAParameters parameters)`
+  - 将私钥参数转换为 ASN.1 格式字节数组。
+  - 参数：
+    - `parameters`：私钥的 RSA 参数。
+  - 返回值：
+    - `ASN.1 格式的私钥字节数组。`
+
+- `void EncodeLength(System.IO.BinaryWriter writer, int length)`
+  - 编码长度。
+  - 参数：
+    - `writer`：用于写入编码长度的二进制写入器。
+    - `length`：要编码的长度。
+
+## PemReader 类
+
+`PemReader` 类用于从 PEM 格式读取 RSA 参数。
+
+### 构造函数
+
+- `PemReader(System.IO.TextReader reader)`
+  - 初始化文本读取器。
+  - 参数：
+    - `reader`：用于读取 PEM 格式的文本读取器。
+
+### 公共方法
+
+- `RSAParameters ReadObject(bool includePrivateKey)`
+  - 读取 PEM 格式并返回 RSA 参数。
+  - 参数：
+    - `includePrivateKey`：是否包括私钥。如果为 `true`，则读取私钥；否则，仅读取公钥。
+  - 返回值：
+    - `读取的 RSA 参数。`
+
+### 私有方法
+
+- `RSAParameters FromAsn1PublicKey(byte[] bytes)`
+  - 从 ASN.1 格式字节数组中提取公钥参数。
+  - 参数：
+    - `bytes`：ASN.1 格式的公钥字节数组。
+  - 返回值：
+    - `提取的公钥参数。`
+
+- `RSAParameters FromAsn1PrivateKey(byte[] bytes)`
+  - 从 ASN.1 格式字节数组中提取私钥参数。
+  - 参数：
+    - `bytes`：ASN.1 格式的私钥字节数组。
+  - 返回值：
+    - `提取的私钥参数。`
+
+- `int ReadLength(System.IO.BinaryReader reader)`
+  - 读取长度。
+  - 参数：
+    - `reader`：用于读取长度的二进制读取器。
+  - 返回值：
+    - `读取的长度。`
+
+## 示例
+
+以下是如何使用 `RSAEncryption` 类进行 RSA 加密和解密的示例代码：
 
 ```csharp
-public RSAEncryption()
-```
-
-## 方法
-
-### GenerateKeys
-
-生成指定大小的RSA密钥对。
-
-```
-csharp复制public void GenerateKeys(int keySize)
-```
-
-#### 参数
-
-- `keySize` (`int`): 密钥的大小，以位为单位（例如：2048）。
-
-### ExportPublicKeyToPEM
-
-导出公钥为PEM格式字符串。
-
-```
-csharp复制public string ExportPublicKeyToPEM()
-```
-
-#### 返回值
-
-- `string`: PEM格式的公钥字符串。
-
-### ExportPrivateKeyToPEM
-
-导出私钥为PEM格式字符串。
-
-```
-csharp复制public string ExportPrivateKeyToPEM()
-```
-
-#### 返回值
-
-- `string`: PEM格式的私钥字符串。
-
-### ImportPublicKeyFromPEM
-
-从PEM格式字符串导入公钥。
-
-```
-csharp复制public void ImportPublicKeyFromPEM(string pem)
-```
-
-#### 参数
-
-- `pem` (`string`): PEM格式的公钥字符串。
-
-### ImportPrivateKeyFromPEM
-
-从PEM格式字符串导入私钥。
-
-```
-csharp复制public void ImportPrivateKeyFromPEM(string pem)
-```
-
-#### 参数
-
-- `pem` (`string`): PEM格式的私钥字符串。
-
-### Encrypt
-
-使用RSA加密数据。
-
-```
-csharp复制public byte[] Encrypt(byte[] data)
-```
-
-#### 参数
-
-- `data` (`byte[]`): 要加密的字节数组。
-
-#### 返回值
-
-- `byte[]`: 加密后的字节数组。
-
-### Decrypt
-
-使用RSA解密数据。
-
-```
-csharp复制public byte[] Decrypt(byte[] data)
-```
-
-#### 参数
-
-- `data` (`byte[]`): 要解密的字节数组。
-
-#### 返回值
-
-- `byte[]`: 解密后的字节数组。
-
-### Encrypt (重载)
-
-使用RSA加密字符串数据。
-
-```
-csharp复制public string Encrypt(string data)
-```
-
-#### 参数
-
-- `data` (`string`): 要加密的字符串。
-
-#### 返回值
-
-- `string`: 加密后的字符串（Base64编码）。
-
-### Decrypt (重载)
-
-使用RSA解密字符串数据。
-
-```
-csharp复制public string Decrypt(string data)
-```
-
-#### 参数
-
-- `data` (`string`): 要解密的字符串（Base64编码）。
-
-#### 返回值
-
-- `string`: 解密后的字符串。
-
-## 内部方法
-
-这些方法用于内部处理RSA参数的PEM格式转换。
-
-### ExportParametersToPEM
-
-将RSA参数导出为PEM格式字符串。
-
-```
-csharp复制private string ExportParametersToPEM(RSAParameters parameters, bool includePrivateKey)
-```
-
-#### 参数
-
-- `parameters` (`RSAParameters`): 要导出的RSA参数。
-- `includePrivateKey` (`bool`): 是否包含私钥。
-
-#### 返回值
-
-- `string`: PEM格式的RSA参数字符串。
-
-### ImportParametersFromPEM
-
-从PEM格式字符串导入RSA参数。
-
-```
-csharp复制private RSAParameters ImportParametersFromPEM(string pem, bool includePrivateKey = false)
-```
-
-#### 参数
-
-- `pem` (`string`): PEM格式的RSA参数字符串。
-- `includePrivateKey` (`bool`, 可选): 是否包含私钥，默认为`false`。
-
-#### 返回值
-
-- `RSAParameters`: 导入的RSA参数。
-
-------
-
-# PemWriter 类说明
-
-## 类概述
-
-`PemWriter`类用于将RSA参数对象导出为PEM格式。
-
-## 构造函数
-
-### PemWriter
-
-初始化`PemWriter`类的新实例。
-
-```
-csharp复制public PemWriter(System.IO.TextWriter writer)
-```
-
-#### 参数
-
-- `writer` (`System.IO.TextWriter`): 用于写入PEM格式字符串的文本写入器。
-
-## 方法
-
-### WriteObject
-
-将RSA参数对象导出为PEM格式。
-
-```
-csharp复制public void WriteObject(RSAParameters parameters, bool includePrivateKey)
-```
-
-#### 参数
-
-- `parameters` (`RSAParameters`): 要导出的RSA参数。
-- `includePrivateKey` (`bool`): 是否包含私钥。
-
-------
-
-# PemReader 类说明
-
-## 类概述
-
-`PemReader`类用于从PEM格式字符串导入RSA参数对象。
-
-## 构造函数
-
-### PemReader
-
-初始化`PemReader`类的新实例。
-
-```
-csharp复制public PemReader(System.IO.TextReader reader)
-```
-
-#### 参数
-
-- `reader` (`System.IO.TextReader`): 用于读取PEM格式字符串的文本读取器。
-
-## 方法
-
-### ReadObject
-
-从PEM格式字符串导入RSA参数对象。
-
-```
-csharp复制public RSAParameters ReadObject(bool includePrivateKey)
-```
-
-#### 参数
-
-- `includePrivateKey` (`bool`): 是否包含私钥。
-
-#### 返回值
-
-- `RSAParameters`: 导入的RSA参数对象。
-
-------
-
-# RSAParametersExtensions 类说明
-
-## 类概述
-
-`RSAParametersExtensions`类包含扩展方法，用于将`RSAParameters`对象转换为ASN.1编码的二进制格式，以及从ASN.1编码的二进制格式解码为`RSAParameters`对象。
-
-## 方法
-
-### ToAsn1PublicKey
-
-将`RSAParameters`对象转换为ASN.1编码的公钥格式。
-
-```
-csharp复制public static byte[] ToAsn1PublicKey(this RSAParameters parameters)
-```
-
-#### 参数
-
-- `parameters` (`RSAParameters`): 要转换的RSA参数。
-
-#### 返回值
-
-- `byte[]`: ASN.1编码的公钥格式字节数组。
-
-### FromAsn1PublicKey
-
-从ASN.1编码的公钥格式解码为`RSAParameters`对象。
-
-```
-csharp复制public static RSAParameters FromAsn1PublicKey(byte[] bytes)
-```
-
-#### 参数
-
-- `bytes` (`byte[]`): ASN.1编码的公钥格式字节数组。
-
-#### 返回值
-
-- `RSAParameters`: 解码后的RSA参数。
-
-### ToAsn1PrivateKey
-
-将`RSAParameters`对象转换为ASN.1编码的私钥格式。
-
-```
-csharp复制public static byte[] ToAsn1PrivateKey(this RSAParameters parameters)
-```
-
-#### 参数
-
-- `parameters` (`RSAParameters`): 要转换的RSA参数。
-
-#### 返回值
-
-- `byte[]`: ASN.1编码的私钥格式字节数组。
-
-### FromAsn1PrivateKey
-
-从ASN.1编码的私钥格式解码为`RSAParameters`对象。
-
-```
-csharp复制public static RSAParameters FromAsn1PrivateKey(byte[] bytes)
-```
-
-#### 参数
-
-- `bytes` (`byte[]`): ASN.1编码的私钥格式字节数组。
-
-#### 返回值
-
-- `RSAParameters`: 解码后的RSA参数。
-
-### EncodeLength
-
-编码长度信息。
-
-```
-csharp复制private static void EncodeLength(System.IO.BinaryWriter writer, int length)
-```
-
-#### 参数
-
-- `writer` (`System.IO.BinaryWriter`): 用于写入数据的二进制写入器。
-- `length` (`int`): 要编码的长度。
-
-### ReadLength
-
-读取长度信息。
-
-```
-csharp复制private static int ReadLength(System.IO.BinaryReader reader)
-```
-
-#### 参数
-
-- `reader` (`System.IO.BinaryReader`): 用于读取数据的二进制读取器。
-
-#### 返回值
-
-- `int`: 读取的长度信息。
-
-### SetPublicKeyFromModulusAndExponent 方法说明
-
-```
-markdown复制### SetPublicKeyFromModulusAndExponent
-设置公钥的模数和指数。
-
-```csharp
-public void SetPublicKeyFromModulusAndExponent(byte[] modulus, byte[] exponent)
-```
-
-#### 参数
-
-- `modulus` (`byte[]`): 公钥的模数。
-- `exponent` (`byte[]`): 公钥的指数。
-
-```
-复制
-```
+using Cryption;
+
+class Program
+{
+    static void Main()
+    {
+        RSAEncryption rsaEncryption = new RSAEncryption();
+        rsaEncryption.GenerateKeys(2048);
+
+        // 导出和打印公钥和私钥
+        string publicKey = rsaEncryption.ExportPublicKeyToPEM();
+        string privateKey = rsaEncryption.ExportPrivateKeyToPEM();
+        Console.WriteLine("Public Key:\n" + publicKey);
+        Console.WriteLine("Private Key:\n" + privateKey);
+
+        // 加密和解密示例
+        string originalText = "Hello, RSA!";
+        string encryptedText = rsaEncryption.Encrypt(originalText);
+        string decryptedText = rsaEncryption.Decrypt(encryptedText);
+        Console.WriteLine("Original Text: " + originalText);
+        Console.WriteLine("Encrypted Text: " + encryptedText);
+        Console.WriteLine("Decrypted Text: " + decryptedText);
+
+        // 示例：将公钥模数转换为十六进制字符串
+        string publicKeyModulusHex = rsaEncryption.ExportPublicKeyModulusToHex();
+        Console.WriteLine("Public Key Modulus in Hex: " + publicKeyModulusHex);
+    }
+}
