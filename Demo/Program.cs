@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Cryption;
@@ -11,7 +12,28 @@ namespace Demo
     {
         static void Main(string[] args)
         {
+            AESEncryption aesEncryption = new AESEncryption();
 
+            // 设置密钥和初始化向量 (IV)
+            byte[] key = AESEncryption.GenerateRandomKey(32); // 例如，256 位密钥
+            byte[] iv = AESEncryption.GenerateRandomIV(16);   // 例如，128 位 IV
+
+            aesEncryption.SetKey(key);
+            aesEncryption.SetIV(iv);
+
+            // 设置加密模式和填充模式
+            aesEncryption.SetMode(CipherMode.ECB);
+            aesEncryption.SetPadding(PaddingMode.PKCS7);
+
+            // 加密和解密示例
+            string originalText = "Hello, AES!";
+            string encryptedText = aesEncryption.Encrypt(originalText);
+            string decryptedText = aesEncryption.Decrypt(encryptedText);
+
+            Console.WriteLine("Original Text: " + originalText);
+            Console.WriteLine("Encrypted Text: " + encryptedText);
+            Console.WriteLine("Decrypted Text: " + decryptedText);
+            Console.ReadLine();
         }
 
         //RSA算法Demo
