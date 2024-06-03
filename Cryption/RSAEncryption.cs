@@ -100,6 +100,7 @@ namespace CryptoUtils
             {
                 bytes[i / 2] = Convert.ToByte(hexModulus.Substring(i, 2), 16);
             }
+
             return bytes;
         }
 
@@ -111,6 +112,7 @@ namespace CryptoUtils
             {
                 hex.AppendFormat("{0:x2}", b);
             }
+
             return hex.ToString();
         }
 
@@ -130,6 +132,7 @@ namespace CryptoUtils
                 var pemWriter = new PemWriter(sw);
                 pemWriter.WriteObject(parameters, includePrivateKey);
             }
+
             return sb.ToString();
         }
 
@@ -157,12 +160,14 @@ namespace CryptoUtils
         // 将RSA参数写入PEM格式
         public void WriteObject(RSAParameters parameters, bool includePrivateKey)
         {
-            var base64 = Convert.ToBase64String(includePrivateKey ? ToAsn1PrivateKey(parameters) : ToAsn1PublicKey(parameters));
+            var base64 =
+                Convert.ToBase64String(includePrivateKey ? ToAsn1PrivateKey(parameters) : ToAsn1PublicKey(parameters));
             _writer.WriteLine(includePrivateKey ? "-----BEGIN PRIVATE KEY-----" : "-----BEGIN PUBLIC KEY-----");
             for (int i = 0; i < base64.Length; i += 64)
             {
                 _writer.WriteLine(base64.Substring(i, Math.Min(64, base64.Length - i)));
             }
+
             _writer.WriteLine(includePrivateKey ? "-----END PRIVATE KEY-----" : "-----END PUBLIC KEY-----");
         }
 
@@ -189,6 +194,7 @@ namespace CryptoUtils
                     EncodeLength(writer, innerBytes.Length);
                     writer.Write(innerBytes);
                 }
+
                 return stream.ToArray();
             }
         }
@@ -203,7 +209,10 @@ namespace CryptoUtils
                 using (var innerStream = new System.IO.MemoryStream())
                 using (var innerWriter = new System.IO.BinaryWriter(innerStream))
                 {
-                    EncodeLength(innerWriter, parameters.Modulus.Length + parameters.Exponent.Length + parameters.D.Length + parameters.P.Length + parameters.Q.Length + parameters.DP.Length + parameters.DQ.Length + parameters.InverseQ.Length + 17);
+                    EncodeLength(innerWriter,
+                        parameters.Modulus.Length + parameters.Exponent.Length + parameters.D.Length +
+                        parameters.P.Length + parameters.Q.Length + parameters.DP.Length + parameters.DQ.Length +
+                        parameters.InverseQ.Length + 17);
                     innerWriter.Write((byte)0x02); // INTEGER
                     EncodeLength(innerWriter, 1);
                     innerWriter.Write((byte)0x00);
@@ -235,6 +244,7 @@ namespace CryptoUtils
                     EncodeLength(writer, innerBytes.Length);
                     writer.Write(innerBytes);
                 }
+
                 return stream.ToArray();
             }
         }
@@ -359,9 +369,8 @@ namespace CryptoUtils
             {
                 length = (reader.ReadByte() << 8) | reader.ReadByte();
             }
+
             return length;
         }
     }
-
-
 }

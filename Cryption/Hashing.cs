@@ -99,6 +99,7 @@ namespace CryptoUtils
             {
                 sb.Append(b.ToString("x2"));
             }
+
             return sb.ToString();
         }
     }

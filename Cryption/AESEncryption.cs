@@ -82,6 +82,7 @@ namespace CryptoUtils
                 {
                     cryptoStream.Write(data, 0, data.Length);
                 }
+
                 return memoryStream.ToArray();
             }
         }
