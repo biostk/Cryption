@@ -51,9 +51,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Cryption\Cryption.csproj">
+    <ProjectReference Include="..\Cryption\CryptoUtils.csproj">
       <Project>{062a784f-54af-4547-9102-558a45103956}</Project>
-      <Name>Cryption</Name>
+      <Name>CryptoUtils</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

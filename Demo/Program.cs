@@ -4,13 +4,62 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using Cryption;
+using CryptoUtils;
 
 namespace Demo
 {
     class Program
     {
+        /*static void Main(string[] args)
+        {
+
+        Console.ReadLine();
+        }*/
+
         static void Main(string[] args)
+        {
+            
+            Console.ReadLine();
+        }
+
+        //Hashing算法Demo
+        /*static void Main(string[] args)
+        {
+            Hashing hashing = new Hashing();
+            string data = "Hello, Hashing!";
+            byte[] dataBytes = Encoding.UTF8.GetBytes(data);
+
+            string md5Hash = hashing.ComputeMD5(data);
+            string md5HashBytes = hashing.ComputeMD5(dataBytes);
+
+            string sha1Hash = hashing.ComputeSHA1(data);
+            string sha1HashBytes = hashing.ComputeSHA1(dataBytes);
+
+            string sha256Hash = hashing.ComputeSHA256(data);
+            string sha256HashBytes = hashing.ComputeSHA256(dataBytes);
+
+            string sha384Hash = hashing.ComputeSHA384(data);
+            string sha384HashBytes = hashing.ComputeSHA384(dataBytes);
+
+            string sha512Hash = hashing.ComputeSHA512(data);
+            string sha512HashBytes = hashing.ComputeSHA512(dataBytes);
+
+            Console.WriteLine("Original Data: " + data);
+            Console.WriteLine("MD5 Hash (String): " + md5Hash);
+            Console.WriteLine("MD5 Hash (Bytes): " + md5HashBytes);
+            Console.WriteLine("SHA-1 Hash (String): " + sha1Hash);
+            Console.WriteLine("SHA-1 Hash (Bytes): " + sha1HashBytes);
+            Console.WriteLine("SHA-256 Hash (String): " + sha256Hash);
+            Console.WriteLine("SHA-256 Hash (Bytes): " + sha256HashBytes);
+            Console.WriteLine("SHA-384 Hash (String): " + sha384Hash);
+            Console.WriteLine("SHA-384 Hash (Bytes): " + sha384HashBytes);
+            Console.WriteLine("SHA-512 Hash (String): " + sha512Hash);
+            Console.WriteLine("SHA-512 Hash (Bytes): " + sha512HashBytes);
+            Console.ReadLine();
+        }*/
+
+        //AES算法Demo
+        /*static void Main(string[] args)
         {
             AESEncryption aesEncryption = new AESEncryption();
 
@@ -34,7 +83,7 @@ namespace Demo
             Console.WriteLine("Encrypted Text: " + encryptedText);
             Console.WriteLine("Decrypted Text: " + decryptedText);
             Console.ReadLine();
-        }
+        }*/
 
         //RSA算法Demo
         /*static void Main(string[] args)

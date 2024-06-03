@@ -2,7 +2,7 @@
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Cryption
+namespace CryptoUtils
 {
     public class RSAEncryption
     {
